@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Speaker Verification &mdash; gyang&#39;s cookbook 1.0 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Leetcode" href="start.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> gyang's cookbook
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ml_exp.html">DL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="start.html">Leetcode</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Speaker Verification</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#models">Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#evaluation-metrics">Evaluation Metrics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#loss-function">Loss function</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">gyang's cookbook</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Speaker Verification</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/speaker_id.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="speaker-verification">
+<h1>Speaker Verification<a class="headerlink" href="#speaker-verification" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="models">
+<h2>Models<a class="headerlink" href="#models" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><dl class="simple">
+<dt>ECAPA-TDNN: pre-trained model from speechbrain:  <a class="reference external" href="https://huggingface.co/speechbrain/spkrec-ecapa-voxceleb">https://huggingface.co/speechbrain/spkrec-ecapa-voxceleb</a></dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>1-Dimensional Squeeze-Excitation Res2Block</dt><dd><ol class="loweralpha simple">
+<li><p>Squeeze: H*W*C  -&gt; 1 * 1 * C (by global average pooling). more receptive field.</p></li>
+<li><p>Excitation: after 1 * 1 * C, add a FC layer for different channel</p></li>
+<li><p>Res2Block: input + output of SE-block</p></li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><p>Multi-layer feature aggregation and summation</p></li>
+<li><dl class="simple">
+<dt>Channel- and context-dependent statistics pooling</dt><dd><ol class="loweralpha simple">
+<li><dl class="simple">
+<dt>global context: mean, std</dt><dd><p>attn = troch.cat([x, mean, std], dim=1)</p>
+</dd>
+</dl>
+</li>
+</ol>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+</div>
+<div class="section" id="evaluation-metrics">
+<h2>Evaluation Metrics<a class="headerlink" href="#evaluation-metrics" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p>Equal Error Rate: This is the rate used to determine the threshold value for a system when its false acceptance rate (FAR) and false rejection rate (FRR) are equal.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>false acceptance rate and false rejection rate are equal</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Minimum Detection Cost:  Compared to equal error-rate, which assigns equal weight to false negatives and false positives, this error-rate is usually used to assess performance in settings where achieving a low false positive rate is more important than achieving a low false negative rate.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>The DCF is defined as a weighted sum of the probabilities of type I and type II errors at a given threshold </p></li>
+<li><p>To avoid ambiguity, we mention here that we will use the following parameters: C_Miss = 1, C_FalseAlarm = 1, and P_Target = 0.05 </p></li>
+<li><p>We follow the procedure outlined in Sec 3.1 of the NIST 2018 Speaker Recognition Evaluation Plan, for the AfV trials</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="loss-function">
+<h2>Loss function<a class="headerlink" href="#loss-function" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><dl class="simple">
+<dt>AAM-softmax</dt><dd><ul class="simple">
+<li><p>Angular Softmax: cos(margin, i)</p></li>
+<li><p>AM-softmax: cos(theta) - m.</p></li>
+<li><p>TODO: add figure</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="start.html" class="btn btn-neutral float-left" title="Leetcode" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, gefei yang.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DL &mdash; gyang&#39;s cookbook 1.0 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Speaker Verification" href="speaker_id.html" />
+    <link rel="prev" title="Welcome to gyang’s cookbook’s documentation!" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> gyang's cookbook
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">DL</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#models">Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dnn-models">DNN Models</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#speech-models">Speech Models</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#training">Training</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#gradient-vanishing-and-exploding">Gradient vanishing and exploding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#finetuning">FineTuning</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="speaker_id.html">Speaker Verification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="leetcode.html">Leetcode</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">gyang's cookbook</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>DL</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/ml_exp.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="dl">
+<h1>DL<a class="headerlink" href="#dl" title="Permalink to this headline">¶</a></h1>
+<p>Pytorch and Tensorflow experience</p>
+<div class="section" id="models">
+<h2>Models<a class="headerlink" href="#models" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><p>LR</p></li>
+<li><p>SVM</p></li>
+<li><p>Decision Tree</p></li>
+<li><p>Random forest</p></li>
+<li><p>Bagging and boosting</p></li>
+<li><p>Gradient boost</p></li>
+<li><p>XGBoost</p></li>
+</ol>
+</div>
+<div class="section" id="dnn-models">
+<h2>DNN Models<a class="headerlink" href="#dnn-models" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><p>CNN</p></li>
+<li><p>RNN</p></li>
+<li><p>Self-attention</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p>positional encoding: each position has a unique positional vector e^i (hand-crafted)</p></li>
+<li><p>vs. CNN: self-attention <strong>receptive field</strong> size is <strong>learnable</strong> compare to CNN whose size is fixed.</p></li>
+<li><p>vs. RNN: RNN <strong>non-parallel</strong>. Bi-RNN is similar, but Uni-direction only learn previous states.</p></li>
+<li><p>Speech application:
+#. speech vector sequence is very long, use <strong>trucked</strong> self-attention?</p></li>
+</ul>
+<a class="reference internal image-reference" href="./_images/self_attn_1.png"><img alt="./_images/self_attn_1.png" class="align-center" src="./_images/self_attn_1.png" style="width: 400px;" /></a>
+<a class="reference internal image-reference" href="./_images/self_attn_2.png"><img alt="./_images/self_attn_2.png" class="align-center" src="./_images/self_attn_2.png" style="width: 400px;" /></a>
+<a class="reference internal image-reference" href="./_images/self_attn_3.png"><img alt="./_images/self_attn_3.png" class="align-center" src="./_images/self_attn_3.png" style="width: 400px;" /></a>
+<a class="reference internal image-reference" href="./_images/self_attn_4.png"><img alt="./_images/self_attn_4.png" class="align-center" src="./_images/self_attn_4.png" style="width: 400px;" /></a>
+</div></blockquote>
+<ol class="arabic simple" start="4">
+<li><p>Mult-head self-attention</p></li>
+</ol>
+<blockquote>
+<div><a class="reference internal image-reference" href="./_images/mult_head.png"><img alt="./_images/mult_head.png" class="align-center" src="./_images/mult_head.png" style="width: 400px;" /></a>
+</div></blockquote>
+<ol class="arabic simple" start="5">
+<li><p>Transformer</p></li>
+</ol>
+<blockquote>
+<div><a class="reference internal image-reference" href="_images/seq2seq-encoder.png"><img alt="Transformer encoder" class="align-center" src="_images/seq2seq-encoder.png" style="width: 400px;" /></a>
+<ul>
+<li><p>encoder: self-attention, residual, layer normal, positional encoding.</p></li>
+<li><p>decoder: plus cross-attention, Uni-direction</p>
+<img alt="./_images/seq2seq_transformer.png" src="./_images/seq2seq_transformer.png" />
+<dl class="field-list simple">
+<dt class="field-odd">width</dt>
+<dd class="field-odd"><p>400</p>
+</dd>
+<dt class="field-even">align</dt>
+<dd class="field-even"><p>center</p>
+</dd>
+<dt class="field-odd">alt</dt>
+<dd class="field-odd"><p>Transformer encoder</p>
+</dd>
+</dl>
+</li>
+<li><p><strong>self-attention</strong> + <strong>positional encoding</strong> + <strong>cross-attention</strong></p></li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="6">
+<li><dl class="simple">
+<dt>BERT</dt><dd><ol class="arabic simple">
+<li><p>use encoder of Transformer: bi-direction</p></li>
+<li><p>random mask token, guess the masked <strong>token</strong>.</p></li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>GPT-2, GPT-3</dt><dd><ol class="arabic simple">
+<li><p>use decoder of Transformer: Uni-direction</p></li>
+<li><p>predict next <strong>sentence</strong></p></li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Wav2vec</dt><dd><ol class="arabic simple">
+<li><p>self-supervised. The objective is a contrastive loss that requires distinguishing a true future audio sample from negatives.</p></li>
+<li><p><em>solution</em>. Solution: Lower the dimensionality of the speech sample through an “encoder network”, and then use a context network to predict the next values.</p></li>
+<li><dl class="simple">
+<dt>encoder net</dt><dd><ul class="simple">
+<li><p>5 conv layer.  30ms shift 10ms</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>context net</dt><dd><ul class="simple">
+<li><p>9 conv layer.  receptive field = 210ms/frame</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Conformer</dt><dd><ol class="arabic simple">
+<li><dl class="simple">
+<dt>Add convolutional layer for local feature.</dt><dd><ul class="simple">
+<li><p>SpecAug -&gt; conv subsampling -&gt; linear -&gt; Dropout -&gt; Conformer Block</p></li>
+<li><p>feed forward -&gt; Mult-head attention -&gt; conv module -&gt; feed forward  -&gt; Layer Norm</p></li>
+<li><p>residual in every module</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+</dd>
+</dl>
+</li>
+</ol>
+<div class="section" id="speech-models">
+<h3>Speech Models<a class="headerlink" href="#speech-models" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><p>Hybrid Models</p></li>
+<li><p>END-to-END Models</p></li>
+<li><p>RNN-T</p></li>
+<li><p>CTC</p></li>
+<li><p>CTC + WFST</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="training">
+<h2>Training<a class="headerlink" href="#training" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="gradient-vanishing-and-exploding">
+<h3>Gradient vanishing and exploding<a class="headerlink" href="#gradient-vanishing-and-exploding" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><p>Avoid vanishing: Initializing, active function(leaky relu), batch normalization , early stop</p></li>
+<li><p>Avoid exploding: Gradient clipping, pooling</p></li>
+<li><p>Avoid overfitting: Regularization ,dropout, early stopping.</p></li>
+<li><p>Layer Norm: normalize single feature vector for mean and std.(along Hidden size) Vertical</p></li>
+<li><p>Batch Norm: normalize all training samples in a batch. (along Batch dimension) Horizontal</p></li>
+</ol>
+</div>
+<div class="section" id="finetuning">
+<h3>FineTuning<a class="headerlink" href="#finetuning" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><p>Transfer learning vs FineTuning</p></li>
+<li><p>Steps:</p></li>
+</ol>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Remove last linear layer</p></li>
+<li><p>Froze previous layers and train the initial parameters with few epoches</p></li>
+<li><p>Unfreeze all layers, keep Training</p></li>
+</ol>
+</div></blockquote>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to gyang’s cookbook’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="speaker_id.html" class="btn btn-neutral float-right" title="Speaker Verification" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, gefei yang.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
