@@ -26,29 +26,29 @@ DNN Models
    * vs. CNN: self-attention **receptive field** size is **learnable** compare to CNN whose size is fixed.
    * vs. RNN: RNN **non-parallel**. Bi-RNN is similar, but Uni-direction only learn previous states.
    * Speech application:
-        #. speech vector sequence is very long, use **trucked** self-attention?
+      #. speech vector sequence is very long, use **trucked** self-attention?
 
-  .. image:: ./_images/self_attn_1.png
-    :width: 400
-    :align: center
+.. image:: ./_images/self_attn_1.png
+  :width: 400
+  :align: center
 
-  .. image:: ./_images/self_attn_2.png
-    :width: 400
-    :align: center
+.. image:: ./_images/self_attn_2.png
+  :width: 400
+  :align: center
 
-  .. image:: ./_images/self_attn_3.png
-    :width: 400
-    :align: center
+.. image:: ./_images/self_attn_3.png
+  :width: 400
+  :align: center
 
-  .. image:: ./_images/self_attn_4.png
-    :width: 400
-    :align: center
+.. image:: ./_images/self_attn_4.png
+  :width: 400
+  :align: center
 
 4. Mult-head self-attention
 
-  .. image:: ./_images/mult_head.png
-    :width: 400
-    :align: center
+.. image:: ./_images/mult_head.png
+  :width: 400
+  :align: center
 
 5. Transformer 
 
@@ -57,15 +57,15 @@ DNN Models
     :align: center
     :alt: Transformer encoder 
 
-  * encoder: self-attention, residual, layer normal, positional encoding.
-  * decoder: plus cross-attention, Uni-direction
+  #. encoder: self-attention, residual, layer normal, positional encoding.
+  #. decoder: plus cross-attention, Uni-direction
   
   .. image:: ./_images/seq2seq_transformer.png 
     :width: 400
     :align: center
     :alt: Transformer
 
-  * **self-attention** + **positional encoding** + **cross-attention**
+  #. **self-attention** + **positional encoding** + **cross-attention**
 
     .. image:: ./_images/seq2seq_cross_attn.png
       :width: 400
@@ -80,7 +80,7 @@ DNN Models
     #. predict next **sentence**  
 8. Wav2vec
     #. self-supervised. The objective is a contrastive loss that requires distinguishing a true future audio sample from negatives.
-    #. *solution*. Solution: Lower the dimensionality of the speech sample through an “encoder network”, and then use a context network to predict the next values.
+    #. *Solution*: Lower the dimensionality of the speech sample through an “encoder network”, and then use a context network to predict the next values.
     #. encoder net  
         *  5 conv layer.  30ms shift 10ms
     #. context net 
@@ -102,8 +102,7 @@ Speech Models
         * Cons: no contextual info. training with all possible combinations.(high computation)
 4. CTC + WFST: Decoding method.  Add lattice. Use LM and Lexicon to constrain CTC output.
 5. RNN-T
-    #. Add another RNN layer onto CTC output, sent the hidden state to next node. The hidden state only 
-        relies on traning context, which equal to a LM. 
+    #. Add another RNN layer onto CTC output, sent the hidden state to next node. The hidden state only relies on training context, which equal to a LM. 
 6. Neural Transducer
     #. Selected a window of feature vector for input. applied Attention.
 7. MoChA
@@ -119,7 +118,7 @@ Gradient vanishing and exploding
 
 1. Avoid vanishing: Initializing, active function(leaky relu), batch normalization , early stop
 2. Avoid exploding: Gradient clipping, pooling 
-3. Avoid overfitting: Regularization ,dropout, early stopping.
+3. Avoid over-fitting: Regularization ,dropout, early stopping.
 4. Layer Norm: normalize single feature vector for mean and std.(along Hidden size) Vertical
 5. Batch Norm: normalize all training samples in a batch. (along Batch dimension) Horizontal  
 

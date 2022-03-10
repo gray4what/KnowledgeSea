@@ -113,33 +113,30 @@
 </ul>
 </li>
 </ol>
-<blockquote>
-<div><a class="reference internal image-reference" href="_images/self_attn_1.png"><img alt="_images/self_attn_1.png" class="align-center" src="_images/self_attn_1.png" style="width: 400px;" /></a>
+<a class="reference internal image-reference" href="_images/self_attn_1.png"><img alt="_images/self_attn_1.png" class="align-center" src="_images/self_attn_1.png" style="width: 400px;" /></a>
 <a class="reference internal image-reference" href="_images/self_attn_2.png"><img alt="_images/self_attn_2.png" class="align-center" src="_images/self_attn_2.png" style="width: 400px;" /></a>
 <a class="reference internal image-reference" href="_images/self_attn_3.png"><img alt="_images/self_attn_3.png" class="align-center" src="_images/self_attn_3.png" style="width: 400px;" /></a>
 <a class="reference internal image-reference" href="_images/self_attn_4.png"><img alt="_images/self_attn_4.png" class="align-center" src="_images/self_attn_4.png" style="width: 400px;" /></a>
-</div></blockquote>
 <ol class="arabic simple" start="4">
 <li><p>Mult-head self-attention</p></li>
 </ol>
-<blockquote>
-<div><a class="reference internal image-reference" href="_images/mult_head.png"><img alt="_images/mult_head.png" class="align-center" src="_images/mult_head.png" style="width: 400px;" /></a>
-</div></blockquote>
+<a class="reference internal image-reference" href="_images/mult_head.png"><img alt="_images/mult_head.png" class="align-center" src="_images/mult_head.png" style="width: 400px;" /></a>
 <ol class="arabic simple" start="5">
 <li><p>Transformer</p></li>
 </ol>
 <blockquote>
 <div><a class="reference internal image-reference" href="_images/seq2seq-encoder.png"><img alt="Transformer encoder" class="align-center" src="_images/seq2seq-encoder.png" style="width: 400px;" /></a>
-<ul class="simple">
+<ol class="arabic simple">
 <li><p>encoder: self-attention, residual, layer normal, positional encoding.</p></li>
 <li><p>decoder: plus cross-attention, Uni-direction</p></li>
-</ul>
+</ol>
 <a class="reference internal image-reference" href="_images/seq2seq_transformer.png"><img alt="Transformer" class="align-center" src="_images/seq2seq_transformer.png" style="width: 400px;" /></a>
-<ul>
-<li><p><strong>self-attention</strong> + <strong>positional encoding</strong> + <strong>cross-attention</strong></p>
-<a class="reference internal image-reference" href="_images/seq2seq_cross_attn.png"><img alt="cross-attention" class="align-center" src="_images/seq2seq_cross_attn.png" style="width: 400px;" /></a>
-</li>
-</ul>
+<ol class="arabic simple">
+<li><p><strong>self-attention</strong> + <strong>positional encoding</strong> + <strong>cross-attention</strong></p></li>
+</ol>
+<blockquote>
+<div><a class="reference internal image-reference" href="_images/seq2seq_cross_attn.png"><img alt="cross-attention" class="align-center" src="_images/seq2seq_cross_attn.png" style="width: 400px;" /></a>
+</div></blockquote>
 </div></blockquote>
 <ol class="arabic simple" start="6">
 <li><dl class="simple">
@@ -161,7 +158,7 @@
 <li><dl class="simple">
 <dt>Wav2vec</dt><dd><ol class="arabic simple">
 <li><p>self-supervised. The objective is a contrastive loss that requires distinguishing a true future audio sample from negatives.</p></li>
-<li><p><em>solution</em>. Solution: Lower the dimensionality of the speech sample through an “encoder network”, and then use a context network to predict the next values.</p></li>
+<li><p><em>Solution</em>: Lower the dimensionality of the speech sample through an “encoder network”, and then use a context network to predict the next values.</p></li>
 <li><dl class="simple">
 <dt>encoder net</dt><dd><ul class="simple">
 <li><p>5 conv layer.  30ms shift 10ms</p></li>
@@ -218,11 +215,7 @@
 <li><p>CTC + WFST: Decoding method.  Add lattice. Use LM and Lexicon to constrain CTC output.</p></li>
 <li><dl class="simple">
 <dt>RNN-T</dt><dd><ol class="arabic simple">
-<li><dl class="simple">
-<dt>Add another RNN layer onto CTC output, sent the hidden state to next node. The hidden state only</dt><dd><p>relies on traning context, which equal to a LM.</p>
-</dd>
-</dl>
-</li>
+<li><p>Add another RNN layer onto CTC output, sent the hidden state to next node. The hidden state only relies on training context, which equal to a LM.</p></li>
 </ol>
 </dd>
 </dl>
@@ -251,7 +244,7 @@
 <ol class="arabic simple">
 <li><p>Avoid vanishing: Initializing, active function(leaky relu), batch normalization , early stop</p></li>
 <li><p>Avoid exploding: Gradient clipping, pooling</p></li>
-<li><p>Avoid overfitting: Regularization ,dropout, early stopping.</p></li>
+<li><p>Avoid over-fitting: Regularization ,dropout, early stopping.</p></li>
 <li><p>Layer Norm: normalize single feature vector for mean and std.(along Hidden size) Vertical</p></li>
 <li><p>Batch Norm: normalize all training samples in a batch. (along Batch dimension) Horizontal</p></li>
 </ol>

@@ -200,7 +200,7 @@ Open brackets must be closed in the correct order.
                  self._move_to_head(node)
 
 
-875. **875. Koko Eating Bananas**
+875. **Koko Eating Bananas**
 ==============================================
 
 .. code-block:: python 
@@ -329,28 +329,6 @@ Palindrome string
         return true;
     }
 
-20. Valid Parentheses
-========================
-
-.. code-block:: python
-
-    def isValid(self, s: str) -> bool:
-        left = []
-        leftOf = {
-            ')':'(',
-            ']':'[',
-            '}':'{'
-        }
-        for c in s:
-            if c in '([{':
-                left.append(c)
-            elif left and leftOf[c]==left[-1]: # 右括号 + left不为空 + 和最近左括号能匹配
-                left.pop()
-            else: # 右括号 + （left为空 / 和堆顶括号不匹配）
-                return False
-            
-        # left中所有左括号都被匹配则return True 反之False
-        return not left
 
 26. **remove duplication in array**
 ====================================

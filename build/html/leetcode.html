@@ -41,14 +41,13 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Leetcode</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#valid-parentheses">20. <strong>Valid Parentheses</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#lru-cache">146. <strong>LRU cache</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#koko-eating-bananas">875. <strong>875. Koko Eating Bananas</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#koko-eating-bananas">875. <strong>Koko Eating Bananas</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#capacity-to-ship-packages-within-d-days">1011. <strong>Capacity To Ship Packages Within D Days</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#is-subsequence">392. <strong>Is Subsequence</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#palindrome-linked-list">234. <strong>Palindrome Linked List</strong></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#palindrome-string">Palindrome string</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id1">20. Valid Parentheses</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#remove-duplication-in-array">26. <strong>remove duplication in array</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#remove-duplication-in-linked-list">83. <strong>remove duplication in linked-list</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#combination">77. <strong>Combination</strong></a></li>
@@ -286,7 +285,7 @@ Open brackets must be closed in the correct order.</p>
 </div>
 </div>
 <div class="section" id="koko-eating-bananas">
-<h2>875. <strong>875. Koko Eating Bananas</strong><a class="headerlink" href="#koko-eating-bananas" title="Permalink to this headline">¶</a></h2>
+<h2>875. <strong>Koko Eating Bananas</strong><a class="headerlink" href="#koko-eating-bananas" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
 <span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
     <span class="k">def</span> <span class="nf">minEatingSpeed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">piles</span><span class="p">,</span> <span class="n">H</span><span class="p">):</span>
@@ -406,28 +405,6 @@ Open brackets must be closed in the correct order.</p>
 <span class="p">}</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="id1">
-<h2>20. Valid Parentheses<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">isValid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-    <span class="n">left</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">leftOf</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s1">&#39;)&#39;</span><span class="p">:</span><span class="s1">&#39;(&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;]&#39;</span><span class="p">:</span><span class="s1">&#39;[&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;}&#39;</span><span class="p">:</span><span class="s1">&#39;{&#39;</span>
-    <span class="p">}</span>
-    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">c</span> <span class="ow">in</span> <span class="s1">&#39;([{&#39;</span><span class="p">:</span>
-            <span class="n">left</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">left</span> <span class="ow">and</span> <span class="n">leftOf</span><span class="p">[</span><span class="n">c</span><span class="p">]</span><span class="o">==</span><span class="n">left</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span> <span class="c1"># 右括号 + left不为空 + 和最近左括号能匹配</span>
-            <span class="n">left</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
-        <span class="k">else</span><span class="p">:</span> <span class="c1"># 右括号 + （left为空 / 和堆顶括号不匹配）</span>
-            <span class="k">return</span> <span class="kc">False</span>
-
-    <span class="c1"># left中所有左括号都被匹配则return True 反之False</span>
-    <span class="k">return</span> <span class="ow">not</span> <span class="n">left</span>
-</pre></div>
 </div>
 </div>
 <div class="section" id="remove-duplication-in-array">
