@@ -13,6 +13,7 @@ Welcome to gyang's cookbook's documentation!
    ml_exp
    speaker_id
    leetcode 
+   bug_doc
 
 
 
