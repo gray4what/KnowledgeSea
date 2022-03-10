@@ -44,6 +44,10 @@ DNN Models
   :width: 400
   :align: center
 
+.. image:: ./_images/self_attn_5.png
+  :width: 400
+  :align: center
+
 4. Mult-head self-attention
 
 .. image:: ./_images/mult_head.png
