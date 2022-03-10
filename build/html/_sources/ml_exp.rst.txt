@@ -21,11 +21,12 @@ DNN Models
 1. CNN
 2. RNN
 3. Self-attention
-  * positional encoding: each position has a unique positional vector e^i (hand-crafted)
-  * vs. CNN: self-attention **receptive field** size is **learnable** compare to CNN whose size is fixed.
-  * vs. RNN: RNN **non-parallel**. Bi-RNN is similar, but Uni-direction only learn previous states.
-  * Speech application:
-    #. speech vector sequence is very long, use **trucked** self-attention?
+
+   * positional encoding: each position has a unique positional vector e^i (hand-crafted)
+   * vs. CNN: self-attention **receptive field** size is **learnable** compare to CNN whose size is fixed.
+   * vs. RNN: RNN **non-parallel**. Bi-RNN is similar, but Uni-direction only learn previous states.
+   * Speech application:
+        #. speech vector sequence is very long, use **trucked** self-attention?
 
   .. image:: ./_images/self_attn_1.png
     :width: 400
@@ -59,12 +60,17 @@ DNN Models
   * encoder: self-attention, residual, layer normal, positional encoding.
   * decoder: plus cross-attention, Uni-direction
   
-    .. image:: ./_images/seq2seq_transformer.png 
+  .. image:: ./_images/seq2seq_transformer.png 
     :width: 400
     :align: center
-    :alt: Transformer encoder 
+    :alt: Transformer
 
   * **self-attention** + **positional encoding** + **cross-attention**
+
+    .. image:: ./_images/seq2seq_cross_attn.png
+      :width: 400
+      :align: center
+      :alt: cross-attention 
   
 6. BERT
     #. use encoder of Transformer: bi-direction
@@ -90,9 +96,19 @@ Speech Models
 
 1. Hybrid Models
 2. END-to-END Models
-3. RNN-T
-4. CTC
-5. CTC + WFST
+3. CTC
+    #. independent output. 
+        * Pros: streaming, beam search.
+        * Cons: no contextual info. training with all possible combinations.(high computation)
+4. CTC + WFST: Decoding method.  Add lattice. Use LM and Lexicon to constrain CTC output.
+5. RNN-T
+    #. Add another RNN layer onto CTC output, sent the hidden state to next node. The hidden state only 
+        relies on traning context, which equal to a LM. 
+6. Neural Transducer
+    #. Selected a window of feature vector for input. applied Attention.
+7. MoChA
+    #. Dynamic window size upon on Neural Transducer.   Add a yes/no parameter to decide if need to stop expand window. 
+
 
 **********
 Training
@@ -113,6 +129,7 @@ FineTuning
 
 1. Transfer learning vs FineTuning
 2. Steps:
+
   1) Remove last linear layer
   2) Froze previous layers and train the initial parameters with few epoches
   3) Unfreeze all layers, keep Training
