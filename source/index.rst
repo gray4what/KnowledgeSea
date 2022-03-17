@@ -12,6 +12,8 @@ Welcome to gyang's cookbook's documentation!
 
    ml_exp
    speaker_id
+   pytorch
+   pytorch_parallel
    leetcode 
    bug_doc
 

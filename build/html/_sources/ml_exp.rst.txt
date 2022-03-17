@@ -5,7 +5,7 @@ DL
 Pytorch and Tensorflow experience
 
 *********
-Models
+ML Models
 *********
 1. LR
 2. SVM
