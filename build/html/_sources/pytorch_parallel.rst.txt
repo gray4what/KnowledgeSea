@@ -1,10 +1,10 @@
 ##########################
-Pytorch parallel computing 
+Pytorch parallel computing
 ##########################
 
 
 **************
-Apex 
+Apex
 **************
 
 **Apex = mixed precision + torch.distributed**
@@ -20,7 +20,7 @@ Apex
 
 * compare with torch.distributed:
 
-.. code-block:: python 
+.. code-block:: python
 
     .parallel import DistributedDataParallel
 
@@ -31,19 +31,19 @@ Apex
     model = torch.nn.parallel.DistributedDataParallel(model, device_ids=[args.local_rank], output_device=args.local_rank)
 
 
-* warp loss: 
+* warp loss:
 
-.. code-block:: python 
+.. code-block:: python
 
     with amp.scale_loss(loss, optimizer) as scaled_loss:
         scaled_loss.backward()
 
 
 *************
-sample code 
+sample code
 *************
 
-.. code-block:: python 
+.. code-block:: python
 
     # main.py
     import torch
@@ -88,4 +88,3 @@ sample code
 
     # run torch.distributed.launch to start
     CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node=4 main.py
-

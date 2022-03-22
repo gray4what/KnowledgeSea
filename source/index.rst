@@ -14,6 +14,7 @@ Welcome to gyang's cookbook's documentation!
    speaker_id
    pytorch
    pytorch_parallel
+   asr
    leetcode 
    bug_doc
 

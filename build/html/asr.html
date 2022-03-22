@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ASR &mdash; gyang&#39;s cookbook 1.0 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Leetcode" href="leetcode.html" />
+    <link rel="prev" title="Pytorch parallel computing" href="pytorch_parallel.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> gyang's cookbook
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ml_exp.html">DL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="speaker_id.html">Speaker Verification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pytorch.html">Pytorch Template</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pytorch_parallel.html">Pytorch parallel computing</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ASR</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#traditional-asr">Traditional ASR</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#gaussian-mixture-model">Gaussian Mixture Model</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#optimizing">Optimizing</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#hidden-markov-model">Hidden Markov Model</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="leetcode.html">Leetcode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bug_doc.html">Documentation notes</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">gyang's cookbook</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>ASR</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/asr.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="asr">
+<h1>ASR<a class="headerlink" href="#asr" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="traditional-asr">
+<h2>Traditional ASR<a class="headerlink" href="#traditional-asr" title="Permalink to this headline">¶</a></h2>
+<p>GMM + HMM</p>
+<div class="section" id="gaussian-mixture-model">
+<h3>Gaussian Mixture Model<a class="headerlink" href="#gaussian-mixture-model" title="Permalink to this headline">¶</a></h3>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}Pr(x) = \sum_{k=1}^{K}\pi\mathcal{N}(x | \mu_k, \Sigma_k)\\where\\\sum_{k=1}^{K} = 1, 0 \le \pi_k \le 1\end{aligned}\end{align} \]</div>
+<ul class="simple">
+<li><p>Loss function is the negative log likelihood:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[-logPr(x| \pi, \mu, \Sigma) = -\sum_{i=1}^{n}log\left\{ \sum_{k=1}^{K}\pi_k \mathcal{N}(x|\mu_k, \Sigma_k)  \right\}\]</div>
+<dl class="simple">
+<dt>hard to optimize directly:</dt><dd><ul class="simple">
+<li><p>sum over the components appears inside the log, thus coupling all the parameters.</p></li>
+</ul>
+</dd>
+</dl>
+<ul>
+<li><p>solution: iterative!  by Expectation-Maximization (EM)</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Given the observations <span class="math notranslate nohighlight">\(x_i, i = 1, 2, ..., n\)</span></p></li>
+<li><p>Each <span class="math notranslate nohighlight">\(x_i\)</span> is associated with a latent variable <span class="math notranslate nohighlight">\(z_i = (z_{i1}, ... z_{ik})\)</span></p></li>
+<li><dl class="simple">
+<dt>Given the complete data <span class="math notranslate nohighlight">\((x,z) = (x_i, z_i), i = 1, 2, ..., n\)</span></dt><dd><ul>
+<li><p>we can estimate the parameters by maximizing the complete data log likelihood:</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<div class="math notranslate nohighlight">
+\[logPr(x| \pi, \mu, \Sigma) = \sum_{i=1}^{n}\sum_{k=1}^{k}Z_{ik}\left\{log \pi_k + log\mathcal{N}(x_i|\mu_k, \Sigma_k)  \right\}\]</div>
+<p>The latent varibale parameter <span class="math notranslate nohighlight">\(Z_{ik}\)</span> represents the contribution of k-th Gaussian to <span class="math notranslate nohighlight">\(x_i\)</span></p>
+<div class="section" id="optimizing">
+<h4>Optimizing<a class="headerlink" href="#optimizing" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>initial with <span class="math notranslate nohighlight">\(\mu_0, \theta_0, I, \pi_0\)</span></p></li>
+<li><dl class="simple">
+<dt>Update equations at the k-th iteration:</dt><dd><ul>
+<li><p>E-step: Give parameters, compute:</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="math notranslate nohighlight">
+\[r_{ik} \triangleq E(Z_{ik}) = \frac{\pi_k \mathcal{N}(x_i | \mu_k, \Sigma_k))}{\sum_{k=1}^{K} \pi_k \mathcal{N}(x_i | \mu_k, \Sigma_k))}\]</div>
+<hr class="docutils" />
+<blockquote>
+<div><ul class="simple">
+<li><p>M-step: Maximize the expected complete log likelihood:</p></li>
+</ul>
+</div></blockquote>
+<div class="math notranslate nohighlight">
+\[E[logPr(x, z | \pi, \mu, \Sigma)]] = \sum_{i=1}^{n}\sum_{k=1}^{k}r_{ik}\left\{log \pi_k + log\mathcal{N}(x_i|\mu_k, \Sigma_k)  \right\}\]</div>
+<p>By updating the parameters:</p>
+<div class="math notranslate nohighlight">
+\[\pi_{k+1} = \frac{\sum_i^{n} r_{ik} }{n}, \mu_{k+1} = \frac{\sum_i^{n} r_{ik} x_i }{r_{ik}}, \Sigma_{k+1} = \frac{\sum_i r_{ik}(x_i -u_k)(x_i -u_k)^T}{\sum_i r_{ik}}\]</div>
+<p>– iterate till likelihood converges</p>
+<p>– Converges to local optimum of the log likelihood</p>
+<p>! It may not converge to the global optimum</p>
+</div>
+</div>
+<div class="section" id="hidden-markov-model">
+<h3>Hidden Markov Model<a class="headerlink" href="#hidden-markov-model" title="Permalink to this headline">¶</a></h3>
+<p>HMM example: <a class="reference external" href="https://github.com/fengdu78/lihang-code/blob/master/%E7%AC%AC10%E7%AB%A0%20%E9%9A%90%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E6%A8%A1%E5%9E%8B/10.HMM.ipynb">HMM</a></p>
+<p>HMM detail: <a class="reference external" href="chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/viewer.html?pdfurl=https%3A%2F%2Fwww.cs.ubc.ca%2F~murphyk%2FSoftware%2FHMM%2FE6820-L10-ASR-seq.pdf&amp;clen=196738&amp;chunk=true">HMM_detail</a></p>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="pytorch_parallel.html" class="btn btn-neutral float-left" title="Pytorch parallel computing" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="leetcode.html" class="btn btn-neutral float-right" title="Leetcode" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, gefei yang.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
