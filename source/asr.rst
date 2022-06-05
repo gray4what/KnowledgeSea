@@ -89,3 +89,12 @@ Hidden Markov Model
 HMM example: HMM_ 
 
 HMM detail: HMM_detail_
+
+
+*********************
+Text to Speech(TTS)
+*********************
+
+.. _TTSbook: https://github.com/cnlinxi/book-text-to-speech/blob/main/text_to_speech.pdf
+
+TTS book: TTSbook_

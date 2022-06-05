@@ -13,6 +13,7 @@
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -38,7 +39,19 @@
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">DL</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#ml-models">ML Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ml-models">ML Models</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#lr">LR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#decision-tree">Decision Tree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#random-forest">Random forest</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bayes">Bayes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#xgboost">XGBoost</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#adaboost">Adaboost</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#svm">SVM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#knn">KNN</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#optimizition">Optimizition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ml-improvement">ML improvement</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#dnn-models">DNN Models</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#speech-models">Speech Models</a></li>
 </ul>
@@ -46,13 +59,16 @@
 <li class="toctree-l2"><a class="reference internal" href="#training">Training</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#gradient-vanishing-and-exploding">Gradient vanishing and exploding</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#finetuning">FineTuning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#overfitting">Overfitting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#optimizing-fails">Optimizing Fails</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="speaker_id.html">Speaker Verification</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pytorch.html">Package and seed</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pytorch.html#hyperparameter">Hyperparameter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pytorch.html">Pytorch Template</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pytorch_parallel.html">Pytorch parallel computing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="asr.html">ASR</a></li>
 <li class="toctree-l1"><a class="reference internal" href="leetcode.html">Leetcode</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bug_doc.html">Documentation notes</a></li>
 </ul>
@@ -86,15 +102,191 @@
 <p>Pytorch and Tensorflow experience</p>
 <div class="section" id="ml-models">
 <h2>ML Models<a class="headerlink" href="#ml-models" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="lr">
+<h3>LR<a class="headerlink" href="#lr" title="Permalink to this headline">¶</a></h3>
+<p><em>1.multi-variant</em></p>
+<a class="reference internal image-reference" href="./_images/ml_lr_0.png"><img alt="./_images/ml_lr_0.png" class="align-center" src="./_images/ml_lr_0.png" style="width: 400px;" /></a>
+<a class="reference internal image-reference" href="./_images/ml_lr.png"><img alt="./_images/ml_lr.png" class="align-center" src="./_images/ml_lr.png" style="width: 400px;" /></a>
+<a class="reference internal image-reference" href="./_images/ml_lr_1.png"><img alt="./_images/ml_lr_1.png" class="align-center" src="./_images/ml_lr_1.png" style="width: 400px;" /></a>
+<a class="reference internal image-reference" href="./_images/ml_lr_2.png"><img alt="./_images/ml_lr_2.png" class="align-center" src="./_images/ml_lr_2.png" style="width: 400px;" /></a>
+<a class="reference internal image-reference" href="./_images/ml_lr_3.png"><img alt="./_images/ml_lr_3.png" class="align-center" src="./_images/ml_lr_3.png" style="width: 400px;" /></a>
+</div>
+<div class="section" id="decision-tree">
+<h3>Decision Tree<a class="headerlink" href="#decision-tree" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><blockquote>
+<div><ol class="arabic simple">
+<li><p>able to classifiction or regression</p></li>
+<li><p>select node.  ranking gain by entropy. Classifiction and Regression Tree(CART: gini).</p></li>
+<li><p>Classifiction cost function (CART)</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[J(k, t_k) = \frac{m_{left}}{m} G_{left} + \frac{m_{right}}{m} G_{right}\]</div>
+</div></blockquote>
+<p>where: <span class="math notranslate nohighlight">\(k\)</span> is a single feature, <span class="math notranslate nohighlight">\(t_k\)</span> is a threshold, <span class="math notranslate nohighlight">\(G_{left/right}\)</span> is impurity,   <span class="math notranslate nohighlight">\(m_{left/right}\)</span> is the number of instances</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Regression cost function (CART)</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[J(k, t_k) = \frac{m_{left}}{m} MSE_{left} + \frac{m_{right}}{m} MSE_{right}\]</div>
+</div></blockquote>
+<p>where:</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}MSE_{node} =\sum_{i\in node}^{}(\hat y_{node} - y^{(i)})^2\\y_{node} = \frac{1}{m_{node}} \sum_{i \in node}^{}(y^{i})\end{aligned}\end{align} \]</div>
+<p>#. Pruning. (avoid Overfitting)
+Prior pruning: early stop creating node
+Post pruning: new COST = cost + n * <a href="#id5"><span class="problematic" id="id6">|num of leaf|</span></a>,  min new COST.</p>
+</div></blockquote>
+</div>
+<div class="section" id="random-forest">
+<h3>Random forest<a class="headerlink" href="#random-forest" title="Permalink to this headline">¶</a></h3>
+<p>Random -&gt;  random samples + random features(no replacement)</p>
+<p>Bootstraping: sampling is performed with replacement.</p>
+<p>Bagging: select n% of samples with replacement to create classifiers</p>
+</div>
+<div class="section" id="bayes">
+<h3>Bayes<a class="headerlink" href="#bayes" title="Permalink to this headline">¶</a></h3>
+<div class="math notranslate nohighlight">
+\[P(A | B) = \frac{P(B | A) P(A)}{P(B)}\]</div>
+<p>#. Max likelihood estimate (MLE):  Given data the MLE for the parameter p is the value of p that maximizes the likelihood P(data <a href="#id1"><span class="problematic" id="id2">|</span></a>p).
+That is, the MLE is the value of p for which the data is most likely.</p>
 <ol class="arabic simple">
-<li><p>LR</p></li>
-<li><p>SVM</p></li>
-<li><p>Decision Tree</p></li>
-<li><p>Random forest</p></li>
+<li><p>Ockham’s Razor: highest p(h) is most likely.</p></li>
+<li><p>Naive Bayes</p></li>
+</ol>
+<p>ex: D is an email with N words, h+ for trash, h- for none-trash.</p>
+<div class="math notranslate nohighlight">
+\[P(h+|D) = P(h+) * P(D|h+) / P(D)\]</div>
+<p>P(h+) is prior probability, P(D|h+1) is condition probability.</p>
+<div class="math notranslate nohighlight">
+\[P(D|h+) = P(d1, d2,..., dn | h+) -&gt; P(d1|h+) * P(d2|d1, h+) * P(d3| d2, d1, h+)...\]</div>
+<p><em>Navie Bayes: d1, d2 … dn they are independent</em>. Hence:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}P(D|h+) = P(d1, d2,..., dn | h+) = P(d1|h+) * P(d2|d1, h+) * P(d3| d2, d1, h+)... \\
+        = P(d1|h+) * P(d2|h+) * P(d3|h+) * ...\end{split}\]</div>
+<p><a href="#id3"><span class="problematic" id="id4">**</span></a>TODO: Bayes spelling check implementation</p>
+</div>
+<div class="section" id="xgboost">
+<h3>XGBoost<a class="headerlink" href="#xgboost" title="Permalink to this headline">¶</a></h3>
+<p><em>Decision tree</em> + <em>object function constrain</em> + <em>Tylor series( 1st and 2nd derivation), saddle point</em>.</p>
+<p>Trick: iterate leafs instead of samples.</p>
+<ol class="arabic simple">
+<li><p>object function constrain: assume new added model(function) will reduce the loss</p></li>
+</ol>
+<a class="reference internal image-reference" href="./_images/xgboost-1.png"><img alt="./_images/xgboost-1.png" class="align-center" src="./_images/xgboost-1.png" style="width: 400px;" /></a>
+<ol class="arabic simple">
+<li><p>Tylor series for objective function</p></li>
+</ol>
+<a class="reference internal image-reference" href="./_images/xgboost-2.png"><img alt="./_images/xgboost-2.png" class="align-center" src="./_images/xgboost-2.png" style="width: 400px;" /></a>
+<ol class="arabic simple">
+<li><p>iterate on leafs instead of samples</p></li>
+</ol>
+<a class="reference internal image-reference" href="./_images/xgboost-3.png"><img alt="./_images/xgboost-3.png" class="align-center" src="./_images/xgboost-3.png" style="width: 400px;" /></a>
+<ol class="arabic simple">
+<li><p>1st derivation -&gt; minimum</p></li>
+</ol>
+<a class="reference internal image-reference" href="./_images/xgboost-4.png"><img alt="./_images/xgboost-4.png" class="align-center" src="./_images/xgboost-4.png" style="width: 400px;" /></a>
+<ol class="arabic simple">
+<li><p>looking for minimum object score</p></li>
+</ol>
+<a class="reference internal image-reference" href="./_images/xgboost-5.png"><img alt="./_images/xgboost-5.png" class="align-center" src="./_images/xgboost-5.png" style="width: 400px;" /></a>
+<ol class="arabic simple">
+<li><p>Overall: use <cite>Gain</cite> to evaluate</p></li>
+</ol>
+<a class="reference internal image-reference" href="./_images/xgboost-6.png"><img alt="./_images/xgboost-6.png" class="align-center" src="./_images/xgboost-6.png" style="width: 400px;" /></a>
+<ol class="arabic simple">
+<li><p>Popular parameters:</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p>learning rate</p></li>
+<li><p>tree</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>max_depth</p></li>
+<li><p>min_child_weight</p></li>
+<li><p>subsample: select sample</p></li>
+<li><p>colsample_bytree: select feature</p></li>
+<li><p>gamma: more leafs more penalty</p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>Regularization</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>lambda</p></li>
+<li><p>alpha</p></li>
+</ul>
+</div></blockquote>
+</div></blockquote>
+</div>
+<div class="section" id="adaboost">
+<h3>Adaboost<a class="headerlink" href="#adaboost" title="Permalink to this headline">¶</a></h3>
+<p>Adaptive boosting: boost weak classifier weight. classifier can be Decision tree, KNN, etc.</p>
+<ol class="arabic simple">
+<li><p>Initializing sample weight, 1/N</p></li>
+<li><p>train weak classifer: if the sample classifed correctly, its weight reduced in next training sample. Or, the weight increased.
+-&gt; iterate the training sample(update weight) + classifier</p></li>
+<li><p>Combine all weak classifier as an strong classifier:  high accuracy classifier has higher weight.</p></li>
+</ol>
+</div>
+<div class="section" id="svm">
+<h3>SVM<a class="headerlink" href="#svm" title="Permalink to this headline">¶</a></h3>
+<a class="reference internal image-reference" href="./_images/svm-kernel.png"><img alt="./_images/svm-kernel.png" class="align-center" src="./_images/svm-kernel.png" style="width: 400px;" /></a>
+</div>
+<div class="section" id="knn">
+<h3>KNN<a class="headerlink" href="#knn" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_neighbors</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">test_row</span><span class="p">,</span> <span class="n">num_neighbors</span><span class="p">):</span>
+  <span class="n">distances</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+  <span class="k">for</span> <span class="n">train_row</span> <span class="ow">in</span> <span class="n">train</span><span class="p">:</span>
+    <span class="n">dist</span> <span class="o">=</span> <span class="n">euclidean_distance</span><span class="p">(</span><span class="n">test_row</span><span class="p">,</span> <span class="n">train_row</span><span class="p">)</span>
+    <span class="n">distances</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">train_row</span><span class="p">,</span> <span class="n">dist</span><span class="p">))</span>
+  <span class="n">distances</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">tup</span><span class="p">:</span> <span class="n">tup</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+  <span class="n">neighbors</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_neighbors</span><span class="p">):</span>
+    <span class="n">neighbors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">distances</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+  <span class="k">return</span> <span class="n">neighbors</span>
+
+<span class="c1"># calculate the Euclidean distance between two vectors</span>
+<span class="k">def</span> <span class="nf">euclidean_distance</span><span class="p">(</span><span class="n">row1</span><span class="p">,</span> <span class="n">row2</span><span class="p">):</span>
+  <span class="n">distance</span> <span class="o">=</span> <span class="mf">0.0</span>
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">row1</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">distance</span> <span class="o">+=</span> <span class="p">(</span><span class="n">row1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">row2</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span>
+  <span class="k">return</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">distance</span><span class="p">)</span>
+
+<span class="c1"># Make a classification prediction with neighbors</span>
+<span class="k">def</span> <span class="nf">predict_classification</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">test_row</span><span class="p">,</span> <span class="n">num_neighbors</span><span class="p">):</span>
+  <span class="n">neighbors</span> <span class="o">=</span> <span class="n">get_neighbors</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">test_row</span><span class="p">,</span> <span class="n">num_neighbors</span><span class="p">)</span>
+  <span class="n">output_values</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">neighbors</span><span class="p">]</span>
+  <span class="n">prediction</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">output_values</span><span class="p">),</span> <span class="n">key</span><span class="o">=</span><span class="n">output_values</span><span class="o">.</span><span class="n">count</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">prediction</span>
+</pre></div>
+</div>
+<ol class="arabic simple">
 <li><p>Bagging and boosting</p></li>
 <li><p>Gradient boost</p></li>
-<li><p>XGBoost</p></li>
 </ol>
+</div>
+</div>
+<div class="section" id="optimizition">
+<h2>Optimizition<a class="headerlink" href="#optimizition" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p>Gradient descent</p>
+<p><em>step 1</em>. (Randomly) Pick an initial values :math:` w^0, b^0 `</p>
+<p><em>step 2</em>. Compute <span class="math notranslate nohighlight">\(\frac{\partial L}{ \partial w} |_{w=w^0}\)</span></p>
+<div class="math notranslate nohighlight">
+\[w^1 \gets w^0 - \eta\frac{\partial L}{ \partial w} |_{w=w^0, b=b^0}
+b^1 \gets b^0 - \eta\frac{\partial L}{ \partial b} |_{w=w^0, b=b^0}\]</div>
+<p><em>step 3</em>. Update :math:` w and b ` iteratively.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="ml-improvement">
+<h2>ML improvement<a class="headerlink" href="#ml-improvement" title="Permalink to this headline">¶</a></h2>
+<a class="reference internal image-reference" href="./_images/ml_impr.png"><img alt="./_images/ml_impr.png" class="align-center" src="./_images/ml_impr.png" style="width: 400px;" /></a>
 </div>
 <div class="section" id="dnn-models">
 <h2>DNN Models<a class="headerlink" href="#dnn-models" title="Permalink to this headline">¶</a></h2>
@@ -266,6 +458,64 @@
 <li><p>Unfreeze all layers, keep Training</p></li>
 </ol>
 </div></blockquote>
+</div>
+<div class="section" id="overfitting">
+<h3>Overfitting<a class="headerlink" href="#overfitting" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><p>Less parameters, sharing parameters(CNN?)</p></li>
+<li><p>Less feature</p></li>
+<li><p>Early stopping</p></li>
+<li><p>Regularization</p></li>
+<li><p>Dropout</p></li>
+</ol>
+</div>
+<div class="section" id="optimizing-fails">
+<h3>Optimizing Fails<a class="headerlink" href="#optimizing-fails" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><p>critical point -&gt; local minima vs saddle point</p></li>
+</ol>
+<blockquote>
+<div><a class="reference internal image-reference" href="./_images/hassian.png"><img alt="./_images/hassian.png" class="align-center" src="./_images/hassian.png" style="width: 400px;" /></a>
+<ul class="simple">
+<li><p>If Hassian matrix :math: <cite>H &gt; 0</cite> (all eigen values &gt; 0 )-&gt; Local minima</p></li>
+<li><p>If Hassian matrix :math: <cite>H &lt; 0</cite> (all eigen values &lt; 0 )-&gt; Local maxima</p></li>
+<li><p>If eigen values of :math: <cite>H &lt; 0 or &gt; 0</cite> -&gt; Saddle point</p></li>
+</ul>
+</div></blockquote>
+<p><em>To escape the saddle point and decrease the loss, Update the parameter along the directions of negative eigen vector.</em></p>
+<ol class="arabic simple" start="2">
+<li><p>Batch size:</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p>Smaller batch size has better performance.  the small is relative to the GPU. with parallel, small and large batch size have same speed for one update.</p></li>
+<li><p>Smaller batch better for Optimizing and Generalization.</p></li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="3">
+<li><p>Momentum</p></li>
+</ol>
+<blockquote>
+<div><p>Momentum + Gradient descent: Movement not just based on gradient, but previous movement.</p>
+<a class="reference internal image-reference" href="./_images/momentum.png"><img alt="./_images/momentum.png" class="align-center" src="./_images/momentum.png" style="width: 400px;" /></a>
+</div></blockquote>
+<ol class="arabic simple" start="4">
+<li><p>Training stuck: loss didn’t decrease doesn’t mean around a critical point.  need calculate the norm of gradient to check critical point.</p></li>
+<li><p>Learning rate scheduler:</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p>learning rate decay.  keep decreasing.</p></li>
+<li><p>warm up.   increase than decrease.  (ResNet, Transformer)</p></li>
+</ul>
+</div></blockquote>
+<dl>
+<dt>Summary:</dt><dd><a class="reference internal image-reference" href="./_images/optims.png"><img alt="./_images/optims.png" class="align-center" src="./_images/optims.png" style="width: 400px;" /></a>
+</dd>
+</dl>
+<p>Root Mean Square(RMSProp): by considering the magnitude of gradient.</p>
+<p>Momentum: by considering the direction of gradient</p>
+<p>Adam = RMSProp + Momentum.</p>
 </div>
 </div>
 </div>
