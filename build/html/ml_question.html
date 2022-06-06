@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ML questions &mdash; gyang&#39;s cookbook 1.0 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Leetcode" href="leetcode.html" />
+    <link rel="prev" title="ASR" href="asr.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> gyang's cookbook
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ml_exp.html">DL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="speaker_id.html">Speaker Verification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pytorch.html">Pytorch Template</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pytorch_parallel.html">Pytorch parallel computing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="asr.html">ASR</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ML questions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#helpful-links">helpful links</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="leetcode.html">Leetcode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bug_doc.html">Documentation notes</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">gyang's cookbook</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>ML questions</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/ml_question.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="ml-questions">
+<h1>ML questions<a class="headerlink" href="#ml-questions" title="Permalink to this headline">¶</a></h1>
+<ol class="arabic simple">
+<li><p>How does a logistic regression model know what the coefficients are?</p></li>
+</ol>
+<blockquote>
+<div><p>Gradient Descent.  sigmod function.  y = wx + b.</p>
+</div></blockquote>
+<ol class="arabic simple">
+<li><p>Difference between convex and non-convex cost function; what does it mean when a cost function is non-convex?</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p>A convex function: given any two points on the curve there will be no intersection with any other points, for non convex function there will be at least one intersection.</p></li>
+<li><p>In terms of cost function with a convex type you are always guaranteed to have a global minimum, whilst for a non convex only local minima.</p></li>
+</ul>
+</div></blockquote>
+<ol class="arabic">
+<li><p>Is random weight assignment better than assigning same weights to the units in the hidden layer?
+- No.if all weights are the same, all units in hidden layer will be the same too. need to break symmetry</p>
+<blockquote>
+<div><p>–  E.g. if all weights are initialized to 1, each unit gets signal equal to sum of inputs (and outputs sigmoid(sum(inputs))). If all weights are zeros, which is even worse, every hidden unit will get zero signal</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>weights are initialized very close to zero, but randomly. This helps in breaking symmetry and every neuron is no longer performing the same computation.</p></li>
+</ul>
+</li>
+<li><p>trapping water(leetcode)</p></li>
+<li><p>Gradient check</p></li>
+</ol>
+<blockquote>
+<div><p>numerically checking the derivatives computed by your code to make sure that your implementation is correct.</p>
+<p><a class="reference external" href="https://towardsdatascience.com/how-to-debug-a-neural-network-with-gradient-checking-41deec0357a9">how gradient check</a></p>
+</div></blockquote>
+<ol class="arabic simple">
+<li><p>Describe Tree, SVM, Random forest and boosting. Talk about their advantage and disadvantages.</p></li>
+</ol>
+<blockquote>
+<div><p><a class="reference external" href="https://towardsdatascience.com/pros-and-cons-of-various-classification-ml-algorithms-3b5bfb3c87d6">Pros and Cons</a></p>
+</div></blockquote>
+<ol class="arabic simple">
+<li><p>How do you weight 9 marbles three times on a balance scale to select the heaviest one?</p></li>
+</ol>
+<blockquote>
+<div><p><a class="reference external" href="https://mattgadient.com/9-marbles-and-a-weight-balance-which-is-the-heaviest-one/">visulization</a></p>
+</div></blockquote>
+<ol class="arabic simple">
+<li><p>Describe the criterion for a particular model selection. Why is dimension reduction important?</p></li>
+<li><p>What are the assumptions for logistic and linear regression?</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p>Linear regression: Linearity of residuals, Independence of residuals, Normal distribution of residuals, Equal variance of residuals</p></li>
+<li><p>Logistic regression: Dependent variable is binary, Observations are independent of each other, Little or no multicollinearity among the independent variables, Linearity of independent variables and log odds.</p></li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple">
+<li><p>The probability that item an item at location A is 0.6 , and 0.8 at location B. What is the probability that item would be found on Amazon website?</p></li>
+</ol>
+<blockquote>
+<div><p>P(A or B) = P(A) + P(B) - P(A AND B) = 0.6 + 0.8 - (0.6*0.8) = 1.4 - 0.48 = 0.92</p>
+</div></blockquote>
+<ol class="arabic simple">
+<li><p>Given a ‘csv’ file with ID and Quantity columns, 50million records and size of data as 2 GBs, write a program in any language of your choice to aggregate the QUANTITY column.</p></li>
+</ol>
+<blockquote>
+<div><p><a class="reference external" href="https://www.kaggle.com/code/szelee/how-to-import-a-csv-file-of-55-million-rows/notebook">example</a></p>
+</div></blockquote>
+<ol class="arabic simple">
+<li><p>When you have a time series data by monthly, it has large data records, how will you find out significant difference between this month and previous months values</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p>t-test,z-test….</p></li>
+</ul>
+<p>TODO</p>
+</div></blockquote>
+<ol class="arabic simple">
+<li><p>What’s the difference between MLE and MAP inference?</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p>MLE gives you the value which maximises the Likelihood P(D|θ). And MAP gives you the value which maximises the posterior probability P(θ|D). As both methods give you a single fixed value, they’re considered as point estimators.</p></li>
+</ul>
+</div></blockquote>
+<p># [LeetCode]Given a function with inputs — an array with N randomly sorted numbers, and an int K, return output in an array with the K largest numbers.</p>
+<ol class="arabic simple">
+<li><p>When users are navigating through the Amazon website, they are performing several actions. What is the best way to model if their next action would be a purchase?</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p>A sequential machine learning algorithm where you manage to keep the state of the user and predict his/her next action. Here many options are possible HMM, RNN, Bandits.</p></li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple">
+<li><p>Estimate the disease probability in one city given the probability is very low national wide. Randomly asked 1000 person in this city, with all negative response(NO disease). What is the probability of disease in this city?</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p>TODO</p></li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple">
+<li><p>Describe SVM.</p></li>
+<li><p>K-mean</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference external" href="https://zhuanlan.zhihu.com/p/78798251">detail</a></p></li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple">
+<li><p>boosting</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p>Boosting is an ensemble learning method that combines a set of weak learners into a strong learner to minimize training errors. In boosting, a random sample of data is selected, fitted with a model and then trained sequentially—that is, each model tries to compensate for the weaknesses of its predecessor</p></li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple">
+<li><p>What are generative and discriminative algorithms? What are their strengths and weaknesses? Which type of algorithms are usually used and why?”</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p>Discriminative models draw boundaries in the data space, while generative models try to model how data is placed throughout the space. A generative model focuses on explaining how the data was generated, while a discriminative model focuses on predicting the labels of the data.</p></li>
+<li><p><a class="reference external" href="https://cedar.buffalo.edu/~srihari/CSE574/Discriminative-Generative.pdf">reference</a></p></li>
+</ul>
+</div></blockquote>
+<a class="reference internal image-reference" href="_images/ml_q1.png"><img alt="_images/ml_q1.png" class="align-center" src="_images/ml_q1.png" style="width: 400px;" /></a>
+<div class="section" id="helpful-links">
+<h2>helpful links<a class="headerlink" href="#helpful-links" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://gist.github.com/felipemoraes/c423d1447ee13585e2270b27f174fb13">reference_web_1</a></p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="asr.html" class="btn btn-neutral float-left" title="ASR" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="leetcode.html" class="btn btn-neutral float-right" title="Leetcode" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, gefei yang.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

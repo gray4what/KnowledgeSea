@@ -15,7 +15,8 @@ Welcome to gyang's cookbook's documentation!
    pytorch
    pytorch_parallel
    asr
-   leetcode 
+   ml_question
+   leetcode
    bug_doc
 
 
